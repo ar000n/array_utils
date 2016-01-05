@@ -15,9 +15,6 @@ int areEqual(ARRAY_UTILS array1,ARRAY_UTILS array2){
 		if(memcmp(array1.base,array2.base,array1.length) == 0){
 			return 1;
 		}
-		else{
-			return 0;
-		}
 	}
 	return 0;
 }
@@ -26,4 +23,8 @@ ARRAY_UTILS resize(ARRAY_UTILS sampleUtils,int length){
 	sampleUtils.base = realloc(sampleUtils.base,length*sampleUtils.typeSize);
 	sampleUtils.length = length;
 	return sampleUtils;
+}
+
+void dispose(ARRAY_UTILS utils){
+	free(utils.base);
 }
