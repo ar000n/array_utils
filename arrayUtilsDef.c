@@ -28,3 +28,31 @@ ARRAY_UTILS resize(ARRAY_UTILS sampleUtils,int length){
 void dispose(ARRAY_UTILS utils){
 	free(utils.base);
 }
+
+int findIndex(ARRAY_UTILS utils,void* element){
+	void * base = utils.base;
+	for(int i=0;i<utils.length;i++){
+		if(memcmp(base,element,utils.typeSize)==0){
+			return i;
+		}
+		base = base + utils.typeSize;
+	}
+	return -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
