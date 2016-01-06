@@ -39,8 +39,9 @@ void test_for_findIndex(){
 	assert(findIndex(array1,&element1) == 2);
 	assert(findIndex(array1,&element2) == -1);
 }
-int * isEven(void* hint, void* item){
+int isEven(void* hint, void* item){
 	int * number = (int *) item;
+	printf("%d\n",*number);
 	if(*number%2 ==0)
 		return 1;
 	return 0;
@@ -53,10 +54,27 @@ void test_for_findFirst(){
 	((int *)array1.base)[1]=2;
 	((int *)array1.base)[2]=3;
 	((int *)array1.base)[3]=4;
-	void * result = findFirst(array1,isEven,hint);
+	void * result = findFirst(array1,&isEven,hint);
 	int * res = (int*)result;
 	assert(*res==2);
 }
+
+void test_for_findLast(){
+	int number = 1;
+	void * hint = &number;
+	ARRAY_UTILS array1= create(4,6);
+	((int *)array1.base)[0]=1;
+	((int *)array1.base)[1]=2;
+	((int *)array1.base)[2]=3;
+	((int *)array1.base)[3]=6;
+	((int *)array1.base)[4]=7;
+	((int *)array1.base)[5]=4;
+	void * result = findLast(array1,&isEven,hint);
+	int * res = (int*)result;
+	//printf("%d\n",*res);
+	assert(*res==4);
+}
+
 void test_for_count(){
 	int number = 1;
 	void * hint = &number;
@@ -66,7 +84,7 @@ void test_for_count(){
 	((int *)array1.base)[2]=3;
 	((int *)array1.base)[3]=4;
 	((int *)array1.base)[3]=6;
-	int result = count(array1,isEven,hint);
+	int result = count(array1,&isEven,hint);
 	assert(result==3);
 }
 int main(){
@@ -74,9 +92,10 @@ int main(){
 	test_for_areEqual_array_utils_if_notEqual();
 	test_for_areEqual_array_utils_if_Equal();
 	test_for_resize_array();
-	test_for_findIndex();
-	test_for_findFirst();
-	test_for_count();
+	// test_for_findIndex();
+	//test_for_findFirst();
+	test_for_findLast();
+	// test_for_count();
 	return 0;
 
 }

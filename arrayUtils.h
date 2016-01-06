@@ -10,5 +10,6 @@ ARRAY_UTILS resize(ARRAY_UTILS sampleUtils,int length);
 void dispose(ARRAY_UTILS utils);
 int findIndex(ARRAY_UTILS utils,void* element);
 typedef int(MatchFunc) (void *,void *);  
-//int MatchFunc(void* hint, void* item);
 void* findFirst(ARRAY_UTILS util, MatchFunc* match, void* hint);
+int count(ARRAY_UTILS util, MatchFunc* match, void* hint);
+void* findLast(ARRAY_UTILS util, MatchFunc* match, void* hint);

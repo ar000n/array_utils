@@ -49,6 +49,18 @@ void* findFirst(ARRAY_UTILS util, MatchFunc* match, void* hint){
 	}
 	return NULL;
 };
+
+void* findLast(ARRAY_UTILS util, MatchFunc* match, void* hint){
+	util.base += ((util.length-1) * util.typeSize);
+	for(int i=util.length-1;i>=0;i--){
+		if(match(hint,util.base) == 1){
+			return util.base;
+		}
+		util.base-=util.typeSize;
+	}
+	return NULL;
+};
+
 int count(ARRAY_UTILS util, MatchFunc* match, void* hint){
 	int counter = 0;
 	for(int i=0;i<util.length;i++){
@@ -58,7 +70,7 @@ int count(ARRAY_UTILS util, MatchFunc* match, void* hint){
 		util.base+=util.typeSize;
 	}
 	return counter;
-}
+};
 
 
 
