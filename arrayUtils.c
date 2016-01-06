@@ -39,12 +39,31 @@ void test_for_findIndex(){
 	assert(findIndex(array1,&element1) == 2);
 	assert(findIndex(array1,&element2) == -1);
 }
+int * isEven(void* hint, void* item){
+	int * number = (int *) item;
+	if(*number%2 ==0)
+		return 1;
+	return 0;
+}
+void test_for_findFirst(){
+	int number = 1;
+	void * hint = &number;
+	ARRAY_UTILS array1= create(4,4);
+	((int *)array1.base)[0]=1;
+	((int *)array1.base)[1]=2;
+	((int *)array1.base)[2]=3;
+	((int *)array1.base)[3]=4;
+	void * result = findFirst(array1,isEven,hint);
+	int * res = (int*)result;
+	assert(*res==2);
+}
 int main(){
 	test_for_create_array_utils();
 	test_for_areEqual_array_utils_if_notEqual();
 	test_for_areEqual_array_utils_if_Equal();
 	test_for_resize_array();
 	test_for_findIndex();
+	test_for_findFirst();
 
 	return 0;
 

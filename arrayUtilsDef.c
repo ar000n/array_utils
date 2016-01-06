@@ -40,6 +40,17 @@ int findIndex(ARRAY_UTILS utils,void* element){
 	return -1;
 }
 
+void* findFirst(ARRAY_UTILS util, MatchFunc* match, void* hint){
+	for(int i=0;i<util.length;i++){
+		if(match(hint,util.base) == 1){
+			return util.base;
+		}
+		util.base+=util.typeSize;
+	}
+	return NULL;
+};
+
+
 
 
 
