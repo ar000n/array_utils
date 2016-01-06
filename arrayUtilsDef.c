@@ -49,6 +49,16 @@ void* findFirst(ARRAY_UTILS util, MatchFunc* match, void* hint){
 	}
 	return NULL;
 };
+int count(ARRAY_UTILS util, MatchFunc* match, void* hint){
+	int counter = 0;
+	for(int i=0;i<util.length;i++){
+		if(match(hint,util.base) == 1){
+			counter++;
+		}
+		util.base+=util.typeSize;
+	}
+	return counter;
+}
 
 
 

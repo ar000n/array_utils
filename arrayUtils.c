@@ -57,6 +57,18 @@ void test_for_findFirst(){
 	int * res = (int*)result;
 	assert(*res==2);
 }
+void test_for_count(){
+	int number = 1;
+	void * hint = &number;
+	ARRAY_UTILS array1= create(4,5);
+	((int *)array1.base)[0]=1;
+	((int *)array1.base)[1]=2;
+	((int *)array1.base)[2]=3;
+	((int *)array1.base)[3]=4;
+	((int *)array1.base)[3]=6;
+	int result = count(array1,isEven,hint);
+	assert(result==3);
+}
 int main(){
 	test_for_create_array_utils();
 	test_for_areEqual_array_utils_if_notEqual();
@@ -64,7 +76,7 @@ int main(){
 	test_for_resize_array();
 	test_for_findIndex();
 	test_for_findFirst();
-
+	test_for_count();
 	return 0;
 
 }
