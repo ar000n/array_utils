@@ -85,6 +85,14 @@ int filter(ARRAY_UTILS util, MatchFunc* match, void* hint, void** destination, i
 	return counter;
 };
 
+void map(ARRAY_UTILS source, ARRAY_UTILS destination, ConvertFunc* convert, void* hint){
+	for(int i=0;i<source.length;i++){
+		convert(hint, source.base, destination.base);
+		source.base+=source.typeSize;
+		destination.base+=source.typeSize;
+	}
+};
+
 
 
 

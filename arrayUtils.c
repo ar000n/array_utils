@@ -42,11 +42,11 @@ void test_for_findIndex(){
 }
 int isEven(void* hint, void* item){
 	int * number = (int *) item;
-	// printf("%d\n",*number);
 	if(*number%2 ==0)
 		return 1;
 	return 0;
 }
+
 void test_for_findFirst(){
 	int number = 1;
 	void * hint = &number;
@@ -105,11 +105,27 @@ void test_for_filter(){
 	assert(**dest ==2);
 	dest = destination+8;
 	assert(**dest ==4);
-
-	// for(int i=0;i<3;i++,destination+=8){
-	// 	printf("%d\n",**dest );
-	// }
-}
+};
+void incrementer(void* hint, void* sourceItem, void* destinationItem){
+	int * source = (int*)sourceItem;
+	int * destination = (int*)destinationItem;
+	*destination = *source+1;
+};
+void test_for_map(){
+	int number = 1;
+	void * hint = &number;
+	ARRAY_UTILS array1 = create(4,4);
+	ARRAY_UTILS array2 = create(4,4);
+	((int *)array1.base)[0]=1;
+	((int *)array1.base)[1]=2;
+	((int *)array1.base)[2]=3;
+	((int *)array1.base)[3]=4;
+	map(array1, array2, incrementer, hint);
+	int* res = (int*)array2.base;
+	assert(res[0]==2);
+	assert(res[3]==5);
+	assert(res[2]==4);
+};
 int main(){
 	test_for_create_array_utils();
 	test_for_areEqual_array_utils_if_notEqual();
@@ -119,7 +135,8 @@ int main(){
 	// test_for_findFirst();
 	//test_for_findLast();
 	//test_for_count();
-	test_for_filter();
+	// test_for_filter();
+	test_for_map();
 	return 0;
 
 }
