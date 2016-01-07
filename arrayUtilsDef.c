@@ -93,6 +93,12 @@ void map(ARRAY_UTILS source, ARRAY_UTILS destination, ConvertFunc* convert, void
 	}
 };
 
+void forEach(ARRAY_UTILS util, OperationFunc* operation, void* hint){
+	for(int i=0;i<util.length;i++){
+		operation(hint, util.base);
+		util.base+=util.typeSize;
+	}
+};
 
 
 

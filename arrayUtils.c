@@ -126,6 +126,24 @@ void test_for_map(){
 	assert(res[3]==5);
 	assert(res[2]==4);
 };
+void multiplier(void* hint, void* item){
+	int* value = (int*)item;
+	*value = (*value) *2;	
+};
+void test_for_forEach(){
+	int number = 1;
+	void * hint = &number;
+	ARRAY_UTILS array1 = create(4,4);
+	((int *)array1.base)[0]=1;
+	((int *)array1.base)[1]=2;
+	((int *)array1.base)[2]=3;
+	((int *)array1.base)[3]=4;
+	forEach(array1, multiplier, hint);
+	int* res = (int*)array1.base;
+	assert(res[0]==2);
+	assert(res[3]==8);
+	assert(res[2]==6);
+};
 int main(){
 	test_for_create_array_utils();
 	test_for_areEqual_array_utils_if_notEqual();
@@ -136,7 +154,8 @@ int main(){
 	//test_for_findLast();
 	//test_for_count();
 	// test_for_filter();
-	test_for_map();
+	// test_for_map();
+	test_for_forEach();
 	return 0;
 
 }
