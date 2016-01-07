@@ -72,7 +72,18 @@ int count(ARRAY_UTILS util, MatchFunc* match, void* hint){
 	return counter;
 };
 
-
+int filter(ARRAY_UTILS util, MatchFunc* match, void* hint, void** destination, int maxItems ){
+	int counter = 0;
+	for(int i=0;i<util.length;i++){
+		if(match(hint,util.base) == 1){
+			*destination = util.base;
+			counter++;
+			destination++;
+		}
+		util.base+=util.typeSize;
+	}
+	return counter;
+};
 
 
 

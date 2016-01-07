@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "arrayUtils.h"
 #include <assert.h>
+#include <stdlib.h>
 
 void test_for_create_array_utils(){
 	ARRAY_UTILS array1 = create(4,2);
@@ -41,7 +42,7 @@ void test_for_findIndex(){
 }
 int isEven(void* hint, void* item){
 	int * number = (int *) item;
-	printf("%d\n",*number);
+	// printf("%d\n",*number);
 	if(*number%2 ==0)
 		return 1;
 	return 0;
@@ -71,7 +72,6 @@ void test_for_findLast(){
 	((int *)array1.base)[5]=4;
 	void * result = findLast(array1,&isEven,hint);
 	int * res = (int*)result;
-	//printf("%d\n",*res);
 	assert(*res==4);
 }
 
@@ -83,9 +83,32 @@ void test_for_count(){
 	((int *)array1.base)[1]=2;
 	((int *)array1.base)[2]=3;
 	((int *)array1.base)[3]=4;
-	((int *)array1.base)[3]=6;
+	((int *)array1.base)[4]=6;
 	int result = count(array1,&isEven,hint);
 	assert(result==3);
+}
+void test_for_filter(){
+	int number = 1;
+	void * hint = &number;
+	int maxItems = 3;
+	ARRAY_UTILS array1= create(4,5);
+	void *destination = (void *)calloc(3, 8);
+	((int *)array1.base)[0]=1;
+	((int *)array1.base)[1]=2;
+	((int *)array1.base)[2]=3;
+	((int *)array1.base)[3]=4;
+	((int *)array1.base)[4]=6;
+	int result = filter(array1,&isEven,hint,destination,maxItems);
+	int **dest;
+	assert(result == 3);
+	dest = destination;
+	assert(**dest ==2);
+	dest = destination+8;
+	assert(**dest ==4);
+
+	// for(int i=0;i<3;i++,destination+=8){
+	// 	printf("%d\n",**dest );
+	// }
 }
 int main(){
 	test_for_create_array_utils();
@@ -93,9 +116,10 @@ int main(){
 	test_for_areEqual_array_utils_if_Equal();
 	test_for_resize_array();
 	// test_for_findIndex();
-	//test_for_findFirst();
-	test_for_findLast();
-	// test_for_count();
+	// test_for_findFirst();
+	//test_for_findLast();
+	//test_for_count();
+	test_for_filter();
 	return 0;
 
 }

@@ -13,3 +13,4 @@ typedef int(MatchFunc) (void *,void *);
 void* findFirst(ARRAY_UTILS util, MatchFunc* match, void* hint);
 int count(ARRAY_UTILS util, MatchFunc* match, void* hint);
 void* findLast(ARRAY_UTILS util, MatchFunc* match, void* hint);
+int filter(ARRAY_UTILS util, MatchFunc* match, void* hint, void** destination, int maxItems );	
