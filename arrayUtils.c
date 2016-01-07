@@ -144,18 +144,39 @@ void test_for_forEach(){
 	assert(res[3]==8);
 	assert(res[2]==6);
 };
+
+void add(void* hint, void* previousItem, void* item){
+	int *element = (int*)item;
+	int *previous = (int*)previousItem;
+	*previous = *previous + *element;
+};
+
+void test_for_reduce(){
+	int number = 1;
+	void * hint = &number;
+
+	ARRAY_UTILS array1 = create(4,4);
+	((int *)array1.base)[0]=1;
+	((int *)array1.base)[1]=12;
+	((int *)array1.base)[2]=3;
+	((int *)array1.base)[3]=4;
+	int * initialValue = (int*)array1.base;
+	int * res =reduce(array1, add, hint, initialValue);
+	assert(*res == 20);
+}
 int main(){
 	test_for_create_array_utils();
 	test_for_areEqual_array_utils_if_notEqual();
 	test_for_areEqual_array_utils_if_Equal();
 	test_for_resize_array();
-	// test_for_findIndex();
-	// test_for_findFirst();
-	//test_for_findLast();
-	//test_for_count();
-	// test_for_filter();
-	// test_for_map();
+	test_for_findIndex();
+	test_for_findFirst();
+	test_for_findLast();
+	test_for_count();
+	test_for_filter();
+	test_for_map();
 	test_for_forEach();
+	test_for_reduce();
 	return 0;
 
 }
